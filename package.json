@@ -1,0 +1,26 @@
+{
+  "name": "aws-nodejs-shop",
+  "version": "1.0.0",
+  "description": "aws-nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/homergit/aws-nodejs-shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/homergit/aws-nodejs-shop/issues"
+  },
+  "homepage": "https://github.com/homergit/aws-nodejs-shop#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.5",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^28.1.3",
+    "webpack": "^5.73.0"
+  }
+}
