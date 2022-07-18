@@ -1,4 +1,4 @@
-module.exports.MOCK_DATA = [
+const MOCK_DATA = [
     {
         "count": 4,
         "description": "Short Product Description1",
@@ -59,9 +59,16 @@ module.exports.MOCK_DATA = [
 
 module.exports.mockAsyncFunction = () => {
     const promise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve("done!");
-        }, 1000);
+        resolve("done!");
     });
     return promise;
 };
+
+module.exports.getResponse = (statusCode) => ({
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+    },
+    statusCode: statusCode,
+    body: JSON.stringify(MOCK_DATA)
+});

@@ -1,4 +1,4 @@
-const {products} = require('./handler.js');
+const {product} = require('./handler-product.js');
 
 const mockHeaders = {
     'Access-Control-Allow-Credentials': true,
@@ -6,7 +6,7 @@ const mockHeaders = {
 };
 
 test('should set mock data', async () => {
-    const responce = await products({test: 'test'});
+    const responce = await product({test: 'test'});
 
     expect(responce.headers).toStrictEqual(mockHeaders);
     expect(responce.body).toBeTruthy();
