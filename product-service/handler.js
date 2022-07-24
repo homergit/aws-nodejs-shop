@@ -1,12 +1,35 @@
-'use strict';
-const {mockAsyncFunction, getResponse} = require('./data');
+const { Client } = require('pg');
 
-module.exports.products = async (event) => {
+const { notFoundResponse, serverErrorResponse, successResponse } = require('./helpers/helpers');
+const { dbOptions } = require('./helpers/db-config');
+
+module.exports.products = async ( event ) => {
+    console.log('event = ', event);
+
+    const client = new Client(dbOptions);
     try {
-        await mockAsyncFunction();
-    } catch {
-        throw new Error({statusCode: 404, body: 'Not Found! Products not found'});
-    }
+        await client.connect();
 
-    return getResponse(200);
+        const { rows: products } = await client.query(`
+            select
+              products.id,
+              products.title,
+              products.price,
+              products.description,
+              stocks.count
+                from products left join stocks on products.id = stocks.product_id ;
+          `);
+
+        console.log('products ', products);
+
+        if( !products.length ){
+            return notFoundResponse('product');
+        }
+
+        return successResponse(products);
+    } catch(e){
+        console.error('500 error: ', e);
+
+        return serverErrorResponse('product');
+    }
 };
